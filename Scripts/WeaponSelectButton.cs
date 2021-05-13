@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 using UnityEngine.UI;
 
 public class WeaponSelectButton : MonoBehaviour
 {
+    public GameObject WeaponImage;
     public string Weapon;
-    GameObject Player;
+    public GameObject PlayerPresets;
     public GameObject Lobby;
 
-    private void Update()
-    {
-        if (Lobby.activeSelf == true)
-        {
-            Player = GameObject.Find("Player");
-        }
-    }
+    public GameObject[] Weapons = new GameObject[4];
 
     public void SetWeapon()
     {
-        Player.GetComponent<Weapons>().MainWeaponString = Weapon;
+        for (int i = 0; i < Weapons.Length; i++)
+        {
+            Weapons[i].SetActive(false);
+        }
+
+        PlayerPresets.GetComponent<SetPlayerItems>().Weapon = Weapon;
+        WeaponImage.SetActive(true);
     }
 
 }

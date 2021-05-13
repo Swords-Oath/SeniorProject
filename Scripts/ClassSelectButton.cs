@@ -1,35 +1,29 @@
+// Program
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class ClassSelectButton : NetworkBehaviour
+public class ClassSelectButton : MonoBehaviour
 {
-    [SerializeField] public GameObject ClassImage;
-    [SerializeField] public string ClassName;
-    [SerializeField]  GameObject Player;
-    [SerializeField]  public GameObject Lobby;
+    // Variables for Classes screen, lobby screen, and player values
+    public GameObject ClassImage;
+    public string ClassName;
+    public GameObject PlayerPresets;
+    public GameObject Lobby;
     public GameObject[] Classes = new GameObject[3];
 
-    private void Update()
-    {
-
-        if (Lobby.activeSelf == true)
-        {
-            Player = GameObject.Find("Player");
-        }
-
-        if (!Player.GetComponent<NetworkIdentity>().hasAuthority) { return; }
-    }
-
+    // When run will set the player value class to the class selected
     public void SetClass()
     {
+        // runs through available classes and gets the one chosen
         for (int i = 0; i < Classes.Length; i++)
         {
             Classes[i].SetActive(false);
         }
 
-        Player.GetComponent<Classes>().Class = ClassName;
+        // Sets the class chosen to player value
+        PlayerPresets.GetComponent<SetPlayerItems>().Class = ClassName;
         ClassImage.SetActive(true);
     }
 }
