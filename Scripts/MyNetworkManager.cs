@@ -114,6 +114,7 @@ public class MyNetworkManager : NetworkManager
            }
         }
     }
+
     #endregion
 
     #region Client

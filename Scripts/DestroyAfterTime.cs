@@ -1,9 +1,12 @@
+// Programs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class DestroyAfterTime : MonoBehaviour
 {
+    // Gets time existed
     public int LifeTime;
     float time = 1;
 
@@ -12,6 +15,7 @@ public class DestroyAfterTime : MonoBehaviour
     {
         time += Time.deltaTime;
 
+        // Destroys gameobject once time is reached
         if(time >= LifeTime)
         {
             Destroy(gameObject);

@@ -116,6 +116,12 @@ public class MyNetworkPlayer : NetworkBehaviour
 
     private void HandleDisplayNameUpdate(string OldName, string NewName)
     {
+        // Checks Name
+        if (NewName == "Missing Name")
+        {
+            NewName = "Player 1";
+        }
+
         // Sets the name text box to players name
         displayNameText.text = NewName;
     }

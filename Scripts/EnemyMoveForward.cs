@@ -1,6 +1,7 @@
 using System.Collections;
 using System;
 using UnityEngine;
+using Mirror;
 
 public class EnemyMoveForward : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class EnemyMoveForward : MonoBehaviour
         transform.Translate(Vector3.forward * 3 * Time.deltaTime);
     }
 
+    [Server]
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Player")
@@ -25,12 +27,12 @@ public class EnemyMoveForward : MonoBehaviour
             {
 
             }
-            Destroy(gameObject);
+            NetworkServer.Destroy(gameObject);
         }
 
         if (collision.gameObject.name == "GuardTower")
         {
-            Destroy(gameObject);
+            NetworkServer.Destroy(gameObject);
         }
     }
 }
