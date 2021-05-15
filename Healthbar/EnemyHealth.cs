@@ -1,9 +1,11 @@
 using System.Collections;
 using System;
 using UnityEngine;
+using Mirror;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : NetworkBehaviour
 {
+    [SyncVar]
     float health = 0.1f;
     public Animator EnemyAni;
 
@@ -37,7 +39,7 @@ public class EnemyHealth : MonoBehaviour
         EnemyAni.SetBool("Move Forward", false);
         EnemyAni.SetTrigger("Die");
         yield return new WaitForSeconds(2);
-        Destroy(gameObject);
+        NetworkServer.Destroy(gameObject);
 
     }
 }
