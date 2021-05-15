@@ -82,6 +82,7 @@ public class Pistol : MonoBehaviour
         }
     }
 
+    [ClientCallback]
     void Shoot()
     {
         // Plays Animation

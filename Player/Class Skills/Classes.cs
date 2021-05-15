@@ -20,6 +20,7 @@ public class Classes : NetworkBehaviour
         Class = GameObject.Find("PlayerPresets").GetComponent<SetPlayerItems>().Class;
     }
 
+    [ClientCallback]
     void Update()
     {
         // Gets player connected to the client
@@ -34,17 +35,38 @@ public class Classes : NetworkBehaviour
             // Based on class spawns a new tower at player position
             if (Class == "Striker")
             {
-                Tower = Instantiate(AttackTower, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-                Tower.name = "StrikeTower";
+                CmdSpawnStrikeTower();
             } else if(Class == "Guard")
             {
-                Tower = Instantiate(DefenceTower, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-                Tower.name = "GuardTower";
+                CmdSpawnGuardTower();
             } else if (Class == "Support")
             {
-                Tower = Instantiate(SupportTower, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
-                Tower.name = "SupportTower";
+                CmdSpawnSupportTower();
             }
         }
+    }
+
+    [Command]
+    void CmdSpawnStrikeTower()
+    {
+        Tower = (GameObject)Instantiate(AttackTower, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
+        NetworkServer.Spawn(Tower);
+        Tower.name = "StrikeTower";
+    }
+
+    [Command]
+    void CmdSpawnGuardTower()
+    {
+        Tower = (GameObject)Instantiate(DefenceTower, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
+        NetworkServer.Spawn(Tower);
+        Tower.name = "GuardTower";
+    }
+
+    [Command]
+    void CmdSpawnSupportTower()
+    {
+        Tower = (GameObject)Instantiate(SupportTower, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z), Quaternion.identity);
+        NetworkServer.Spawn(Tower);
+        Tower.name = "SupportTower";
     }
 }
